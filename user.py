@@ -86,40 +86,27 @@ class User:
                 print()
             window.destroy()
             words = pd.read_csv('Content/Внешность.csv')
-            f = open("Users/" + login.get() + "/Внешность.csv", "w")
             words.to_csv('Users/' + login.get() + "/Внешность.csv")
             words = pd.read_csv('Content/Все слова.csv')
-            f = open("Users/" + login.get() + "/Все слова.csv", "w")
             words.to_csv('Users/' + login.get() + "/Все слова.csv")
             words = pd.read_csv('Content/Погода.csv')
-            f = open("Users/" + login.get() + "/Погода.csv", "w")
             words.to_csv('Users/' + login.get() + "/Погода.csv")
             User.main_page(login)
         else:
-            file = open("users.csv", "w")
             users_new = pd.DataFrame(data=[[login.get(), password.get()]], columns=['login', 'password'])
             users_new.to_csv("users.csv", index=False)
-            file.close()
             path = os.getcwd()
-            path += "/Users"
-            try:
-                os.mkdir(path)
-            except OSError:
-                print()
-            path += "/" + login.get()
+            path += "/Users/" + login.get()
             try:
                 os.mkdir(path)
             except OSError:
                 print()
             window.destroy()
             words = pd.read_csv('Content/Внешность.csv')
-            f = open("Users/"+login.get()+"/Внешность.csv", "w")
             words.to_csv('Users/'+login.get()+"/Внешность.csv")
             words = pd.read_csv('Content/Все слова.csv')
-            f = open("Users/" + login.get() + "/Все слова.csv", "w")
             words.to_csv('Users/' + login.get() + "/Все слова.csv")
             words = pd.read_csv('Content/Погода.csv')
-            f = open("Users/" + login.get() + "/Погода.csv", "w")
             words.to_csv('Users/' + login.get() + "/Погода.csv")
             User.main_page(login)
 
@@ -127,7 +114,7 @@ class User:
         path = os.getcwd()
         path += "/users.csv"
         if len(login.get()) <= 3:
-            messagebox.showinfo("Ошибка", "Логин слишком короткий!12")
+            messagebox.showinfo("Ошибка", "Логин слишком короткий!")
             return
         if len(password.get()) <= 3:
             messagebox.showinfo("Ошибка", "Пароль слишком короткий!")
@@ -213,7 +200,7 @@ class Proxy:
         window.mainloop()
 
 
-class Iterator(Iterator):
+class MyIterator(Iterator):
 
     _position: int = None
     _reverse: bool = False
@@ -239,12 +226,12 @@ class WordsCollection(Iterable):
     def __init__(self, collection: List[Any] = []) -> None:
         self._collection = collection
 
-    def __iter__(self) -> Iterator:
+    def __iter__(self) -> MyIterator:
 
-        return Iterator(self._collection)
+        return MyIterator(self._collection)
 
-    def get_reverse_iterator(self) -> Iterator:
-        return Iterator(self._collection, True)
+    def get_reverse_iterator(self) -> MyIterator:
+        return MyIterator(self._collection, True)
 
     def add_item(self, item: Any):
         self._collection.append(item)
