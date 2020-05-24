@@ -84,14 +84,6 @@ class User:
                 os.mkdir(path)
             except OSError:
                 print()
-            window.destroy()
-            words = pd.read_csv('Content/Внешность.csv')
-            words.to_csv('Users/' + login.get() + "/Внешность.csv")
-            words = pd.read_csv('Content/Все слова.csv')
-            words.to_csv('Users/' + login.get() + "/Все слова.csv")
-            words = pd.read_csv('Content/Погода.csv')
-            words.to_csv('Users/' + login.get() + "/Погода.csv")
-            User.main_page(login)
         else:
             users_new = pd.DataFrame(data=[[login.get(), password.get()]], columns=['login', 'password'])
             users_new.to_csv("users.csv", index=False)
@@ -101,14 +93,14 @@ class User:
                 os.mkdir(path)
             except OSError:
                 print()
-            window.destroy()
-            words = pd.read_csv('Content/Внешность.csv')
-            words.to_csv('Users/'+login.get()+"/Внешность.csv")
-            words = pd.read_csv('Content/Все слова.csv')
-            words.to_csv('Users/' + login.get() + "/Все слова.csv")
-            words = pd.read_csv('Content/Погода.csv')
-            words.to_csv('Users/' + login.get() + "/Погода.csv")
-            User.main_page(login)
+        window.destroy()
+        words = pd.read_csv('Content/Внешность.csv')
+        words.to_csv('Users/' + login.get() + "/Внешность.csv")
+        words = pd.read_csv('Content/Все слова.csv')
+        words.to_csv('Users/' + login.get() + "/Все слова.csv")
+        words = pd.read_csv('Content/Погода.csv')
+        words.to_csv('Users/' + login.get() + "/Погода.csv")
+        User.main_page(login)
 
     def sign_in(window, login, password):
         path = os.getcwd()
