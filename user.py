@@ -80,25 +80,29 @@ class User:
             users_new.to_csv("users.csv", index=False)
             path = os.getcwd()
             path += "/Users/" + login.get()
-            try:
-                os.mkdir(path)
-            except OSError:
-                print()
         else:
+            file = open("users.csv", "w")
             users_new = pd.DataFrame(data=[[login.get(), password.get()]], columns=['login', 'password'])
             users_new.to_csv("users.csv", index=False)
+            file.close()
             path = os.getcwd()
-            path += "/Users/" + login.get()
+            path += "/Users"
             try:
                 os.mkdir(path)
             except OSError:
                 print()
+            path += "/" + login.get()
+        try:
+            os.mkdir(path)
+        except OSError:
+            print()
         window.destroy()
         words = pd.read_csv('Content/Внешность.csv')
         words.to_csv('Users/' + login.get() + "/Внешность.csv")
         words = pd.read_csv('Content/Все слова.csv')
         words.to_csv('Users/' + login.get() + "/Все слова.csv")
         words = pd.read_csv('Content/Погода.csv')
+        f = open("Users/" + login.get() + "/Погода.csv", "w")
         words.to_csv('Users/' + login.get() + "/Погода.csv")
         User.main_page(login)
 
@@ -106,7 +110,7 @@ class User:
         path = os.getcwd()
         path += "/users.csv"
         if len(login.get()) <= 3:
-            messagebox.showinfo("Ошибка", "Логин слишком короткий!")
+            messagebox.showinfo("Ошибка", "Логин слишком короткий!12")
             return
         if len(password.get()) <= 3:
             messagebox.showinfo("Ошибка", "Пароль слишком короткий!")
